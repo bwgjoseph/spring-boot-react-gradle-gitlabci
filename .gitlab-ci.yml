@@ -37,3 +37,8 @@ test:
   stage: test
   script: gradle check
   dependencies: []
+
+end:
+  stage: .post
+  script:
+    - echo 'hello world'
