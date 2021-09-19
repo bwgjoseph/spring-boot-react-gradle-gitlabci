@@ -40,13 +40,14 @@ test:
   after_script:
     - pwd
     - cat $CI_PROJECT_DIR/server/build/reports/jacoco/test/html/index.html
+    - ls $CI_PROJECT_DIR/server/build/reports/jacoco/test
   dependencies: []
   artifacts:
     when: always
     reports:
       junit: build/test-results/test/**/TEST-*.xml
     paths:
-      - build/reports/jacoco/test/jacocoTestReport.xml
+      - $CI_PROJECT_DIR/server/build/reports/jacoco/test/jacocoTestReport.xml
 
 coverage:
   # Must be in a stage later than test-jdk11's stage.
@@ -56,7 +57,7 @@ coverage:
   image: registry.gitlab.com/haynes/jacoco2cobertura:1.0.7
   script:
     # convert report from jacoco to cobertura, using relative project path
-    - python /opt/cover2cover.py build/reports/jacoco/test/jacocoTestReport.xml $CI_PROJECT_DIR/server/src/main/java/ > build/cobertura.xml
+    - python /opt/cover2cover.py $CI_PROJECT_DIR/server/build/reports/jacoco/test/jacocoTestReport.xml $CI_PROJECT_DIR/server/src/main/java/ > build/cobertura.xml
   needs: ['test']
   dependencies:
     - test
