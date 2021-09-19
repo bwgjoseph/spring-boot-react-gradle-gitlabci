@@ -36,6 +36,8 @@ build:
 test:
   stage: test
   script: gradle check
+  after_script:
+    - cat build/reports/jacoco/test/html/index.html
   dependencies: []
   artifacts:
     when: always
