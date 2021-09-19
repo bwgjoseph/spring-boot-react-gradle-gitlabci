@@ -3,7 +3,35 @@
 [![pipeline status](https://gitlab.com/bwgjoseph/km/badges/master/pipeline.svg)](https://gitlab.com/bwgjoseph/km/-/commits/master)
 [![coverage report](https://gitlab.com/bwgjoseph/km/badges/master/coverage.svg)](https://gitlab.com/bwgjoseph/km/-/commits/master)
 
-# Order
+## Checklist
+
+- [x] Create multi-module gradle project
+  - [x] React Client
+  - [x] Spring Boot Server
+- [x] Create gitlab-ci.yml
+  - [x] Use `default:` keyword for base image for all jobs/stages
+  - [x] Enable caching
+    - [x] Client
+    - [x] Server
+  - [x] Use of `pre` and `post` stage
+- [x] Add `com.github.node-gradle.node` plugin
+  - [x] Configure task
+    - [x] yarnInstall
+    - [x] yarnBuild
+    - [x] yarnCopyClientToServer
+- [x] Add `jacoco` plugin
+  - [x] Publish jacoco report to `gitlab-ci`
+  - [x] Configure `Test coverage parsing` in `Settings > CI/CD > General pipelines` and set to `Total.*?([0-9]{1,3})%`
+  - [x] Add code coverage report using to `cobertura` using `jacoco2cobertura`
+    - [x] This code coverage report is only available on `merge request`
+- [x] Add `com.google.cloud.tools.jib` plugin
+- [x] Add support for incremental task
+  - [x] See `yarnInstall` and `yarnBuild` task
+- [ ] Ensure `yarnCopyClientToServer` is always run after `yarnBuild` (see [unresolved-issue](#unresolved-issue))
+- [ ] Add support for remote cache using [jfrog artifactory](https://jfrog.com/blog/speed-up-your-gradle-builds-with-jfrog-artifactory/)
+
+
+## Order
 
 [Classes](https://docs.gradle.org/current/userguide/java_plugin.html#sec:java_tasks) is a `Java Plugin Lifecycle Task` which is an aggregate task that depends on `compileJava and processResources`. So this seem like a good place in inject `yarnBuild` task since almost all relevant java task depends on `classes` which means that whether we are calling `assemble, bootRun, or jib`, `yarnBuild` will always be called and run before compiling the server build. This would ensure that no matter in development, or in CI, the client production build will always be in the `server/src/main/resources/static` directory
 
