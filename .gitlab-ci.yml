@@ -18,6 +18,8 @@ default:
       - .gradle
       - client/.gradle
       - client/build
+      - client/node_modules
+      - server/build
 variables:
   GRADLE_OPTS: "-Dorg.gradle.logging.level=info"
 

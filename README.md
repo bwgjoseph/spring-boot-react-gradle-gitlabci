@@ -121,6 +121,24 @@ Watching 1 directory hierarchies to track changes
 :server:classes (Thread[Execution worker for ':',5,main]) started.
 ```
 
+## Note
+
+When encountering logs like such in `gitlab-ci`
+
+```log
+Task ':client:yarnInstall' is not up-to-date because:
+  Output property '$1' file /builds/bwgjoseph/km/client/node_modules has been removed.
+  Output property '$1' file /builds/bwgjoseph/km/client/node_modules/.bin has been removed.
+  Output property '$1' file /builds/bwgjoseph/km/client/node_modules/.bin/acorn has been removed.
+```
+
+Based on [this-post](https://discuss.gradle.org/t/gradle-says-output-file-has-been-removed-but-it-hasnt-been/10125), it could mean 2 things
+
+- the output file has been deleted
+- the output file is no longer in the output file list
+
+In the current case, most likely due to the latter as each new pipeline, the output directory has been wiped if cache is not available (possible?)
+
 ## Resources
 
 - [Authoring Tasks](https://docs.gradle.org/current/userguide/more_about_tasks.html)
