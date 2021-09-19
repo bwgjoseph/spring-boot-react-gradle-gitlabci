@@ -1,6 +1,7 @@
 plugins {
 	id 'org.springframework.boot' version '2.5.4'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'com.google.cloud.tools.jib' version '3.1.4'
 	id 'java'
 	id 'jacoco'
 }
@@ -28,6 +29,12 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
+jib {
+	container {
+		mainClass = 'com.bwgjoseph.km.KmApplication'
+	}
+}
+
 test {
 	useJUnitPlatform()
 	finalizedBy jacocoTestReport // report is always generated after tests run
@@ -40,4 +47,7 @@ jacocoTestReport {
 	}
 }
 
-assemble.dependsOn(':client:yarnBuild')
+classes.dependsOn(':client:yarnBuild')
+// jibDockerBuild.dependsOn(':client:yarnBuild')
+// bootRun.dependsOn(':client:yarnBuild')
+// assemble.dependsOn(':client:yarnBuild')
