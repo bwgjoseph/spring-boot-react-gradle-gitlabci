@@ -1,0 +1,13 @@
+plugins {
+	id 'com.github.node-gradle.node' version '3.1.1'
+}
+
+task yarnInstall(type: YarnTask) {
+	group = 'yarn'
+	args = ['install', '--frozen-lockfile']
+}
+
+task yarnBuild(type: YarnTask, dependsOn: ['yarnInstall']) {
+	group = 'yarn'
+	args = ['run', 'build']
+}

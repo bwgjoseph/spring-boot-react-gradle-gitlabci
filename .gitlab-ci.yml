@@ -18,6 +18,10 @@ default:
       - build
       - .gradle
 
+stages:
+  - build
+  - test
+
 init:
   stage: .pre
   script:
@@ -30,3 +34,4 @@ build:
 test:
   stage: test
   script: gradle check
+  dependencies: []
