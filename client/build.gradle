@@ -9,11 +9,38 @@ node {
 }
 
 task yarnInstall(type: YarnTask) {
+	inputs.file('package.json')
+	outputs.dir('node_modules')
+
 	group = 'yarn'
 	args = ['install', '--frozen-lockfile']
 }
 
 task yarnBuild(type: YarnTask, dependsOn: ['yarnInstall']) {
+	// Declare the following as the inputs where if it does not change
+	// it will not trigger an actual build as it would be UP-TO-DATE
+	inputs.dir('src')
+	inputs.files('package.json', 'tsconfig.json', 'yarn.lock')
+
+	outputs.dir('build')
+
 	group = 'yarn'
 	args = ['run', 'build']
 }
+
+task yarnCopyClientToServer(type: Copy) {
+	dependsOn yarnBuild
+
+	inputs.dir("${project.rootDir}\\client\\build")
+	outputs.dir("${project.rootDir}\\server\\src\\main\\resources\\static")
+
+	def staticDir = new File("${project.rootDir}\\server\\src\\main\\resources\\static")
+	staticDir.deleteDir()
+
+	copy {
+		from "${project.rootDir}\\client\\build"
+		into "${project.rootDir}\\server\\src\\main\\resources\\static"
+	}
+}
+
+yarnCopyClientToServer.mustRunAfter(yarnBuild)
