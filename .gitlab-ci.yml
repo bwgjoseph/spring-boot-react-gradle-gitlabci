@@ -28,7 +28,7 @@ stages:
   - test
   - visualize
 
-.init:
+pre:
   stage: .pre
   script:
     - printenv
@@ -43,7 +43,6 @@ test:
   after_script:
     - pwd
     - cat $CI_PROJECT_DIR/server/build/reports/jacoco/test/html/index.html
-    - ls $CI_PROJECT_DIR/server/build/reports/jacoco/test
   dependencies: []
   artifacts:
     when: always
@@ -70,7 +69,7 @@ coverage:
     reports:
       cobertura: $CI_PROJECT_DIR/server/build/reports/jacoco/test/cobertura.xml
 
-.end:
+post:
   stage: .post
   script:
     - echo 'hello world'
