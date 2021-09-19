@@ -8,7 +8,7 @@
 # https://gradle.org/
 # https://github.com/gradle/gradle
 
-image: gradle:alpine
+image: gradle:7.2.0-jdk11-hotspot
 
 # Disable the Gradle daemon for Continuous Integration servers as correctness
 # is usually a priority over speed in CI environments. Using a fresh
