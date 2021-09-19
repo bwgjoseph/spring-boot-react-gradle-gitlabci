@@ -24,12 +24,12 @@ stages:
   - build
   - test
 
-init:
+.init:
   stage: .pre
   script:
     - printenv
 
-build:
+.build:
   stage: build
   script: gradle --build-cache assemble
 
@@ -37,6 +37,7 @@ test:
   stage: test
   script: gradle check
   after_script:
+    - pwd
     - cat build/reports/jacoco/test/html/index.html
   dependencies: []
   artifacts:
@@ -44,7 +45,7 @@ test:
     reports:
       junit: build/test-results/test/**/TEST-*.xml
 
-end:
+.end:
   stage: .post
   script:
     - echo 'hello world'
