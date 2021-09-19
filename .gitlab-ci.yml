@@ -46,7 +46,7 @@ test:
   artifacts:
     when: always
     reports:
-      junit: build/test-results/test/**/TEST-*.xml
+      junit: $CI_PROJECT_DIR/server/build/test-results/test/**/TEST-*.xml
     paths:
       - $CI_PROJECT_DIR/server/build/reports/jacoco/test/jacocoTestReport.xml
 
