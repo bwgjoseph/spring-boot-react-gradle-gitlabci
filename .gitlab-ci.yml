@@ -15,9 +15,10 @@ default:
   cache:
     key: "$CI_COMMIT_REF_NAME"
     paths:
+      - .gradle
+      - build
       - client/.gradle
       - client/build
-      - .gradle
 variables:
   GRADLE_OPTS: "-Dorg.gradle.logging.level=info"
 
