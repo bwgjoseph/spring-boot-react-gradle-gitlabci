@@ -1,1 +1,3 @@
 rootProject.name = 'km'
+
+include 'server'
