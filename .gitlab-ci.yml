@@ -38,7 +38,7 @@ test:
   script: gradle check
   after_script:
     - pwd
-    - cat build/reports/jacoco/test/html/index.html
+    - cat `pwd`/server/build/reports/jacoco/test/html/index.html
   dependencies: []
   artifacts:
     when: always
