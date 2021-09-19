@@ -2,6 +2,12 @@ plugins {
 	id 'com.github.node-gradle.node' version '3.1.1'
 }
 
+node {
+	download = true
+	version = '12.18.3'
+	yarnVersion = '1.22.4'
+}
+
 task yarnInstall(type: YarnTask) {
 	group = 'yarn'
 	args = ['install', '--frozen-lockfile']

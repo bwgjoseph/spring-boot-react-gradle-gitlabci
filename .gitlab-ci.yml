@@ -17,6 +17,8 @@ default:
     paths:
       - build
       - .gradle
+variables:
+  GRADLE_OPTS: "-Dorg.gradle.logging.level=info"
 
 stages:
   - build
