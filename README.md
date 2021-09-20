@@ -14,6 +14,7 @@
     - [x] Client
     - [x] Server
   - [x] Use of `pre` and `post` stage
+  - [ ] Use of `interruptible`?
 - [x] Add `com.github.node-gradle.node` plugin
   - [x] Configure task
     - [x] yarnInstall
@@ -25,10 +26,20 @@
   - [x] Add code coverage report using to `cobertura` using `jacoco2cobertura`
     - [x] This code coverage report is only available on `merge request`
 - [x] Add `com.google.cloud.tools.jib` plugin
+  - [ ] Publish image to `docker hub`
 - [x] Add support for incremental task
   - [x] See `yarnInstall` and `yarnBuild` task
 - [ ] Ensure `yarnCopyClientToServer` is always run after `yarnBuild` (see [unresolved-issue](#unresolved-issue))
 - [ ] Add support for remote cache using [jfrog artifactory](https://jfrog.com/blog/speed-up-your-gradle-builds-with-jfrog-artifactory/)
+- [ ] Add [pmd](https://docs.gradle.org/current/userguide/pmd_plugin.html)
+- [ ] Add [checkstyle](https://docs.gradle.org/current/userguide/checkstyle_plugin.html) plugin
+  - [ ] [google-java-format](https://github.com/google/google-java-format)
+- [ ] Add [errorprone](https://errorprone.info/) plugin
+  - [ ] [NullAway](https://github.com/uber/NullAway)
+- [ ] Add [spotbugs](https://spotbugs.github.io/) plugin
+- [x] Ensure `.npmrc, .yarnrc` is being [respected](https://github.com/node-gradle/gradle-node-plugin/issues/196) during pipeline run
+  - [ ] See [note-config](#config) for more info
+- [ ] Switch to rely on [sourceSet](https://github.com/node-gradle/gradle-node-plugin/blob/master/examples/spring-boot-angular/webapp/build.gradle.kts) instead of `classes`? Or to configure to run `yarnCopyClientToServer`
 
 
 ## Order
@@ -151,6 +162,8 @@ Watching 1 directory hierarchies to track changes
 
 ## Note
 
+### output-file
+
 When encountering logs like such in `gitlab-ci`
 
 ```log
@@ -166,6 +179,12 @@ Based on [this-post](https://discuss.gradle.org/t/gradle-says-output-file-has-be
 - the output file is no longer in the output file list
 
 In the current case, most likely due to the latter as each new pipeline, the output directory has been wiped if cache is not available (possible?)
+
+---
+
+### config
+
+Based on the current test, it seem that it does respect `.npmrc` configuration during pipeline run **BUT** only if `yarn.lock` does not exist in the first place. Most likely that is because `yarn.lock` already defined the urls of the packages, and hence, will ignore what was set for in `.npmrc`
 
 ## Resources
 
