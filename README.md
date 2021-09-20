@@ -41,6 +41,12 @@
   - [ ] See [note-config](#config) for more info
 - [ ] Switch to rely on [sourceSet](https://github.com/node-gradle/gradle-node-plugin/blob/master/examples/spring-boot-angular/webapp/build.gradle.kts) instead of `classes`? Or to configure to run `yarnCopyClientToServer`
 
+## How to
+
+This project brings in [org.barfuin.gradle.taskinfo](https://gitlab.com/barfuin/gradle-taskinfo) plugin so to make it easier to view the order of the task via
+
+- `./gradlew tiOrder <task>`
+- `./gradlew tiTree <task>`
 
 ## Order
 

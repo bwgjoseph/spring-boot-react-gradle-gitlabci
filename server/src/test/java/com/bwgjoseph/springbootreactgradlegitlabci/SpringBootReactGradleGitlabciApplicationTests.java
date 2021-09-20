@@ -1,10 +1,10 @@
-package com.bwgjoseph.km;
+package com.bwgjoseph.springbootreactgradlegitlabci;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class KmApplicationTests {
+class SpringBootReactGradleGitlabciApplicationTests {
 
 	@Test
 	void contextLoads() {

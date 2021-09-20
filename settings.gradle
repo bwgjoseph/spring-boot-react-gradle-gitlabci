@@ -1,4 +1,4 @@
-rootProject.name = 'km'
+rootProject.name = 'spring-boot-react-gradle-gitlabci'
 
 include 'client'
 include 'server'
