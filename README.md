@@ -1,7 +1,7 @@
 # Project Info
 
-[![pipeline status](https://gitlab.com/bwgjoseph/spring-boot-react-gradle-gitlabci/badges/master/pipeline.svg)](https://gitlab.com/bwgjoseph/spring-boot-react-gradle-gitlabci/-/commits/master)
-[![coverage report](https://gitlab.com/bwgjoseph/spring-boot-react-gradle-gitlabci/badges/master/coverage.svg)](https://gitlab.com/bwgjoseph/spring-boot-react-gradle-gitlabci/-/commits/master)
+[![pipeline status](https://gitlab.com/bwgjoseph/spring-boot-react-gradle-gitlabci/badges/main/pipeline.svg)](https://gitlab.com/bwgjoseph/spring-boot-react-gradle-gitlabci/-/commits/main)
+[![coverage report](https://gitlab.com/bwgjoseph/spring-boot-react-gradle-gitlabci/badges/main/coverage.svg)](https://gitlab.com/bwgjoseph/spring-boot-react-gradle-gitlabci/-/commits/main)
 
 ## Checklist
 
