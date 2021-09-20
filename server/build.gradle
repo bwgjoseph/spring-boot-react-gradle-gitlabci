@@ -47,7 +47,12 @@ jacocoTestReport {
 	}
 }
 
+task syncClientBuildToServerResource(type: Sync) {
+	dependsOn(':client:yarnBuild')
+
+	from "${project.rootDir}\\client\\build"
+	into "${project.rootDir}\\server\\src\\main\\resources\\static"
+}
+
+processResources.dependsOn('syncClientBuildToServerResource')
 classes.dependsOn(':client:yarnBuild')
-// jibDockerBuild.dependsOn(':client:yarnBuild')
-// bootRun.dependsOn(':client:yarnBuild')
-// assemble.dependsOn(':client:yarnBuild')

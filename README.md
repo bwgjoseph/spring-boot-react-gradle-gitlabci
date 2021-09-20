@@ -29,7 +29,8 @@
   - [ ] Publish image to `docker hub`
 - [x] Add support for incremental task
   - [x] See `yarnInstall` and `yarnBuild` task
-- [ ] Ensure `yarnCopyClientToServer` is always run after `yarnBuild` (see [unresolved-issue](#unresolved-issue))
+- [x] Ensure `yarnCopyClientToServer` is always run after `yarnBuild` (see [unresolved-issue](#unresolved-issue))
+  - [x] See [source-set](#source-set)
 - [ ] Add support for remote cache using [jfrog artifactory](https://jfrog.com/blog/speed-up-your-gradle-builds-with-jfrog-artifactory/)
 - [ ] Add [pmd](https://docs.gradle.org/current/userguide/pmd_plugin.html)
 - [ ] Add [checkstyle](https://docs.gradle.org/current/userguide/checkstyle_plugin.html) plugin
@@ -39,7 +40,8 @@
 - [ ] Add [spotbugs](https://spotbugs.github.io/) plugin
 - [x] Ensure `.npmrc, .yarnrc` is being [respected](https://github.com/node-gradle/gradle-node-plugin/issues/196) during pipeline run
   - [ ] See [note-config](#config) for more info
-- [ ] Switch to rely on [sourceSet](https://github.com/node-gradle/gradle-node-plugin/blob/master/examples/spring-boot-angular/webapp/build.gradle.kts) instead of `classes`? Or to configure to run `yarnCopyClientToServer`
+- [x] Switch to rely on [sourceSet](https://github.com/node-gradle/gradle-node-plugin/blob/master/examples/spring-boot-angular/webapp/build.gradle.kts) instead of `classes`? Or to configure to run `yarnCopyClientToServer`
+  - [x] See [source-set](#source-set) for info
 
 ## How to
 
@@ -191,6 +193,25 @@ In the current case, most likely due to the latter as each new pipeline, the out
 ### config
 
 Based on the current test, it seem that it does respect `.npmrc` configuration during pipeline run **BUT** only if `yarn.lock` does not exist in the first place. Most likely that is because `yarn.lock` already defined the urls of the packages, and hence, will ignore what was set for in `.npmrc`
+
+### source-set
+
+Using `sourceSet` somehow will cause `jar` to include multiple client build files for some reason. Hence, not ideal to use it unless figure out what's the cause of it.
+
+```groovy
+sourceSets {
+  java {
+    main {
+      resources {
+        // This makes the processResources task automatically depend on the :client:yarnBuild
+        srcDir(syncClientBuildToServerResource)
+      }
+    }
+  }
+}
+```
+
+Manually assigning it seem to be working fine `processResources.dependsOn('syncClientBuildToServerResource')`
 
 ## Resources
 

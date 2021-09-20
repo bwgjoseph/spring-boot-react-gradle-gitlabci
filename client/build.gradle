@@ -28,20 +28,3 @@ task yarnBuild(type: YarnTask, dependsOn: ['yarnInstall']) {
 	group = 'yarn'
 	args = ['run', 'build']
 }
-
-task yarnCopyClientToServer(type: Copy) {
-	dependsOn yarnBuild
-
-	inputs.dir("${project.rootDir}\\client\\build")
-	outputs.dir("${project.rootDir}\\server\\src\\main\\resources\\static")
-
-	def staticDir = new File("${project.rootDir}\\server\\src\\main\\resources\\static")
-	staticDir.deleteDir()
-
-	copy {
-		from "${project.rootDir}\\client\\build"
-		into "${project.rootDir}\\server\\src\\main\\resources\\static"
-	}
-}
-
-yarnCopyClientToServer.mustRunAfter(yarnBuild)
