@@ -42,6 +42,10 @@
   - [ ] See [note-config](#config) for more info
 - [x] Switch to rely on [sourceSet](https://github.com/node-gradle/gradle-node-plugin/blob/master/examples/spring-boot-angular/webapp/build.gradle.kts) instead of `classes`? Or to configure to run `yarnCopyClientToServer`
   - [x] See [source-set](#source-set) for info
+- [x] Add [liquibase](https://github.com/JetBrains/jetbrains-gradle-plugins) plugin
+  - [x] Externalise the config (liquibase.gradle)
+  - [x] Use `apply from` to inject external gradle file
+  - [x] Test it doesn't applies `java.toolchain` configuration when not configured together with `java` plugin
 
 ## How to
 
