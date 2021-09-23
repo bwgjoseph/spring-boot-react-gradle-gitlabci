@@ -1,3 +1,17 @@
+buildCache {
+    local {
+        enabled = false
+    }
+    remote(HttpBuildCache) {
+        url = JFROG_URL
+        credentials {
+            username = JFROG_USER
+            password = JFROG_PW
+        }
+        push = true
+    }
+}
+
 rootProject.name = 'spring-boot-react-gradle-gitlabci'
 
 include 'client'
